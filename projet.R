@@ -1,0 +1,10 @@
+library(R.matlab)
+library(Rmixmod)
+library(mclust)
+library(NbClust)
+library(FactoMineR)
+jaffe=readMat("jaffe.mat")
+jaffe=as.data.frame(jaffe)
+dim(jaffe)
+#213 889
+head(jaffe)
