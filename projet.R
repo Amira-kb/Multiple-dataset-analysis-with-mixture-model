@@ -74,5 +74,55 @@ NMI(complete.jaffe.r,jaffe$class)
 hcpcward.jeffe=HCPC(pca.jaffe,method = "ward")
 #4
 hcpccomp.jeffe=HCPC(pca.jaffe,method = "complete")
+#4
 hcpcsingle.jeffe=HCPC(pca.jaffe,method = "single")
+#3
 hcpcav.jeffe=HCPC(pca.jaffe,method = "average")
+#3
+
+
+###6
+#Comparaison avec le nombre de classes conseillée par HCPC
+ward.jaffe.r2=cutree(ward.jaffe,k=4)
+table(ward.jaffe.r2,hcpcward.jeffe$data.clust$clust)
+NMI(ward.jaffe.r2,hcpcward.jeffe$data.clust$clust)
+#0.75
+plot(pca.jaffe$ind$coord,col=ward.jaffe.r2)
+
+complete.jaffe.r2=cutree(complete.jaffe,k=4)
+table(complete.jaffe.r2,hcpccomp.jeffe$data.clust$clust)
+NMI(complete.jaffe.r2,hcpccomp.jeffe$data.clust$clust)
+#0.42
+plot(pca.jaffe$ind$coord,col=complete.jaffe.r2)
+
+single.jaffe.r2=cutree(single.jaffe,k=3)
+table(single.jaffe.r2,hcpcsingle.jeffe$data.clust$clust)
+NMI(single.jaffe.r2,hcpcsingle.jeffe$data.clust$clust)
+#0.23
+average.jaffe.r2=cutree(average.jaffe,k=3)
+table(average.jaffe.r2,hcpcav.jeffe$data.clust$clust)
+NMI(average.jaffe.r2,hcpcav.jeffe$data.clust$clust)
+#0.16
+
+##Comparaison avec le vrais nombre de classes 
+hcpcward.jeffe2=HCPC(pca.jaffe,method = "ward",nb.clust = 10)
+table(ward.jaffe.r,hcpcward.jeffe2$data.clust$clust)
+NMI(ward.jaffe.r,hcpcward.jeffe2$data.clust$clust)
+#0.79
+plot(pca.jaffe$ind$coord,col=ward.jaffe.r)
+
+hcpccomp.jeffe2=HCPC(pca.jaffe,method = "complete", nb.clust = 10)
+table(complete.jaffe.r,hcpccomp.jeffe2$data.clust$clust)
+NMI(complete.jaffe.r,hcpccomp.jeffe2$data.clust$clust)
+#0.69
+plot(pca.jaffe$ind$coord,col=complete.jaffe.r)
+
+hcpcsingle.jeffe2=HCPC(pca.jaffe,method = "single",nb.clust = 10)
+table(single.jaffe.r,hcpcsingle.jeffe2$data.clust$clust)
+NMI(single.jaffe.r,hcpcsingle.jeffe2$data.clust$clust)
+#0.33
+hcpcav.jeffe2=HCPC(pca.jaffe,method = "average",nb.clust = 10)
+table(average.jaffe.r,hcpcav.jeffe2$data.clust$clust)
+NMI(average.jaffe.r,hcpcav.jeffe2$data.clust$clust)
+#0.62
+
