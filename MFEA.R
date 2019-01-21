@@ -104,80 +104,80 @@ ARI(complete.mfeat$Best.partition,mfeat$class)
 
 
 ###5
-hcpcward.jeffe=HCPC(pca.mfeat,method = "ward")
+hcpcward.mfeat=HCPC(pca.mfeat,method = "ward")
 #3
-hcpccomp.jeffe=HCPC(pca.mfeat,method = "complete")
+hcpccomp.mfeat=HCPC(pca.mfeat,method = "complete")
 #3
-hcpcsingle.jeffe=HCPC(pca.mfeat,method = "single")
+hcpcsingle.mfeat=HCPC(pca.mfeat,method = "single")
 #3
-hcpcav.jeffe=HCPC(pca.mfeat,method = "average")
+hcpcav.mfeat=HCPC(pca.mfeat,method = "average")
 #3
 
 
 ###6
 #Comparaison avec le nombre de classes conseillée par HCPC
 ward.mfeat.r2=NbClust(mfeat[,-241],method = "ward.D",index = "silhouette", max.nc = 3, min.nc = 3)$Best.partition
-table(ward.mfeat.r2,hcpcward.jeffe$data.clust$clust)
-NMI(ward.mfeat.r2,hcpcward.jeffe$data.clust$clust)
+table(ward.mfeat.r2,hcpcward.mfeat$data.clust$clust)
+NMI(ward.mfeat.r2,hcpcward.mfeat$data.clust$clust)
 #0.34
-ARI(ward.mfeat.r2,hcpcward.jeffe$data.clust$clust)
+ARI(ward.mfeat.r2,hcpcward.mfeat$data.clust$clust)
 #0.24
 plot(pca.mfeat$ind$coord,col=ward.mfeat.r2)
 
 complete.mfeat.r2=NbClust(mfeat[,-241],method = "complete",index = "silhouette", max.nc = 3, min.nc = 3)$Best.partition
-table(complete.mfeat.r2,hcpccomp.jeffe$data.clust$clust)
-NMI(complete.mfeat.r2,hcpccomp.jeffe$data.clust$clust)
+table(complete.mfeat.r2,hcpccomp.mfeat$data.clust$clust)
+NMI(complete.mfeat.r2,hcpccomp.mfeat$data.clust$clust)
 #0.25
-ARI(complete.mfeat.r2,hcpccomp.jeffe$data.clust$clust)
+ARI(complete.mfeat.r2,hcpccomp.mfeat$data.clust$clust)
 #0.209
 plot(pca.mfeat$ind$coord,col=complete.mfeat.r2)
 
 single.mfeat.r2=NbClust(mfeat[,-241],method = "single",index = "silhouette", max.nc = 3, min.nc = 3)$Best.partition
-table(single.mfeat.r2,hcpcsingle.jeffe$data.clust$clust)
-NMI(single.mfeat.r2,hcpcsingle.jeffe$data.clust$clust)
+table(single.mfeat.r2,hcpcsingle.mfeat$data.clust$clust)
+NMI(single.mfeat.r2,hcpcsingle.mfeat$data.clust$clust)
 #0.001
-ARI(single.mfeat.r2,hcpcsingle.jeffe$data.clust$clust)
+ARI(single.mfeat.r2,hcpcsingle.mfeat$data.clust$clust)
 #0.0003
 
 average.mfeat.r2=NbClust(mfeat[,-241],method = "average",index = "silhouette", max.nc = 3, min.nc = 3)$Best.partition
-table(average.mfeat.r2,hcpcav.jeffe$data.clust$clust)
-NMI(average.mfeat.r2,hcpcav.jeffe$data.clust$clust)
+table(average.mfeat.r2,hcpcav.mfeat$data.clust$clust)
+NMI(average.mfeat.r2,hcpcav.mfeat$data.clust$clust)
 #0.28
-ARI(average.mfeat.r2,hcpcav.jeffe$data.clust$clust)
+ARI(average.mfeat.r2,hcpcav.mfeat$data.clust$clust)
 #0.29
 
 ##Comparaison avec le vrais nombre de classes 
-hcpcward.jeffe2=HCPC(pca.mfeat,method = "ward",nb.clust = 10)
-table(ward.mfeat$Best.partition,hcpcward.jeffe2$data.clust$clust)
-NMI(ward.mfeat$Best.partition,hcpcward.jeffe2$data.clust$clust)
+hcpcward.mfeat2=HCPC(pca.mfeat,method = "ward",nb.clust = 10)
+table(ward.mfeat$Best.partition,hcpcward.mfeat2$data.clust$clust)
+NMI(ward.mfeat$Best.partition,hcpcward.mfeat2$data.clust$clust)
 #0.523
-ARI(ward.mfeat$Best.partition,hcpcward.jeffe2$data.clust$clust)
+ARI(ward.mfeat$Best.partition,hcpcward.mfeat2$data.clust$clust)
 #0.3560
 plot(pca.mfeat$ind$coord,col=ward.mfeat$Best.partition)
-plot(pca.mfeat$ind$coord,col=hcpcward.jeffe2$data.clust$clust)
+plot(pca.mfeat$ind$coord,col=hcpcward.mfeat2$data.clust$clust)
 
-hcpccomp.jeffe2=HCPC(pca.mfeat,method = "complete", nb.clust = 10)
-table(complete.mfeat$Best.partition,hcpccomp.jeffe2$data.clust$clust)
-NMI(complete.mfeat$Best.partition,hcpccomp.jeffe2$data.clust$clust)
+hcpccomp.mfeat2=HCPC(pca.mfeat,method = "complete", nb.clust = 10)
+table(complete.mfeat$Best.partition,hcpccomp.mfeat2$data.clust$clust)
+NMI(complete.mfeat$Best.partition,hcpccomp.mfeat2$data.clust$clust)
 #0.416
-ARI(complete.mfeat$Best.partition,hcpccomp.jeffe2$data.clust$clust)
+ARI(complete.mfeat$Best.partition,hcpccomp.mfeat2$data.clust$clust)
 #0.269
 plot(pca.mfeat$ind$coord,col=complete.mfeat$Best.partition)
 
-hcpcsingle.jeffe2=HCPC(pca.mfeat,method = "single",nb.clust = 10)
-table(single.mfeat$Best.partition,hcpcsingle.jeffe2$data.clust$clust)
-NMI(single.mfeat$Best.partition,hcpcsingle.jeffe2$data.clust$clust)
+hcpcsingle.mfeat2=HCPC(pca.mfeat,method = "single",nb.clust = 10)
+table(single.mfeat$Best.partition,hcpcsingle.mfeat2$data.clust$clust)
+NMI(single.mfeat$Best.partition,hcpcsingle.mfeat2$data.clust$clust)
 #0.005
-ARI(single.mfeat$Best.partition,hcpcsingle.jeffe2$data.clust$clust)
+ARI(single.mfeat$Best.partition,hcpcsingle.mfeat2$data.clust$clust)
 #-4.348269e-05
 plot(pca.mfeat$ind$coord,col=single.mfeat$Best.partition)
 
 
-hcpcav.jeffe2=HCPC(pca.mfeat,method = "average",nb.clust = 10)
-table(average.mfeat$Best.partition,hcpcav.jeffe2$data.clust$clust)
-NMI(average.mfeat$Best.partition,hcpcav.jeffe2$data.clust$clust)
+hcpcav.mfeat2=HCPC(pca.mfeat,method = "average",nb.clust = 10)
+table(average.mfeat$Best.partition,hcpcav.mfeat2$data.clust$clust)
+NMI(average.mfeat$Best.partition,hcpcav.mfeat2$data.clust$clust)
 #0.4312
-ARI(average.mfeat$Best.partition,hcpcav.jeffe2$data.clust$clust)
+ARI(average.mfeat$Best.partition,hcpcav.mfeat2$data.clust$clust)
 #0.301
 
 ###7
@@ -236,13 +236,13 @@ plot(tsne.mfeat$Y,col=single.mfeat$Best.partition, xlab="1ere composante", ylab=
 plot(tsne.mfeat$Y,col=average.mfeat$Best.partition, xlab="1ere composante", ylab="2eme composante", main="CAH average NbClust avec t-sne") #CAH average NbClust
 
 
-plot(tsne.mfeat$Y,col=hcpcward.jeffe2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC ward NbClust avec t-sne") #HCPC ward
+plot(tsne.mfeat$Y,col=hcpcward.mfeat2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC ward NbClust avec t-sne") #HCPC ward
 
-plot(tsne.mfeat$Y,col=hcpccomp.jeffe2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC complete NbClust avec t-sne") #HCPC complete
+plot(tsne.mfeat$Y,col=hcpccomp.mfeat2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC complete NbClust avec t-sne") #HCPC complete
 
-plot(tsne.mfeat$Y,col=hcpcsingle.jeffe2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC single NbClust avec t-sne") #HCPC single
+plot(tsne.mfeat$Y,col=hcpcsingle.mfeat2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC single NbClust avec t-sne") #HCPC single
 
-plot(tsne.mfeat$Y,col=hcpcav.jeffe2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC average NbClust avec t-sne") #HCPC average
+plot(tsne.mfeat$Y,col=hcpcav.mfeat2$data.clust$clust, xlab="1ere composante", ylab="2eme composante", main="CAH HCPC average NbClust avec t-sne") #HCPC average
 
 
 plot(tsne.mfeat$Y,col=mix.mfeat@bestResult@partition, xlab="1ere composante", ylab="2eme composante", main="GMM Rmixmod avec t-sne") #GMM Rmixmod
