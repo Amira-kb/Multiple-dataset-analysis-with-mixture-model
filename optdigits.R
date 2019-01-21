@@ -255,11 +255,11 @@ write.csv(ox_train,"ox_train.csv",row.names=FALSE)
 write.csv(ox_test,"ox_test.csv",row.names=FALSE)
 write.csv(optdigits[,-65],"optdigits.csv",row.names=FALSE)
 
-auto4=read.csv("auto4.csv", header = F, skip=-1)
-plot(auto4, col=optdigits$class,, main="Reduction de optdigits avec un autoencoder")
-Automc.optdigits=Mclust(data= auto4,G=10)
+auto5=read.csv("auto5.csv", header = F, skip=-1)
+plot(auto5, col=optdigits$class,, main="Reduction de optdigits avec un autoencoder")
+Automc.optdigits=Mclust(data= auto5,G=10)
 NMI(Automc.optdigits$classification,optdigits$class)
-#0.194
+#0.09
 ARI(Automc.optdigits$classification,optdigits$class)
-#0.093
-plot(auto3, col=Automc.optdigits$classification,, main="Mclust de optdigits autoencoder")
+#0.040
+plot(auto5, col=Automc.optdigits$classification,, main="Mclust de optdigits autoencoder")
