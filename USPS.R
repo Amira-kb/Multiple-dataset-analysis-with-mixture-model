@@ -235,10 +235,10 @@ write.csv(ux_test,"ux_test.csv",row.names=FALSE)
 write.csv(usps[,-257],"usps.csv",row.names=FALSE)
 
 auto4=read.csv("auto4.csv", header = F, skip=-1)
-plot(auto3, col=usps$class,, main="Reduction de usps avec un autoencoder")
-Automc.usps=Mclust(data= auto3,G=10)
+plot(auto4, col=usps$class,, main="Reduction de usps avec un autoencoder")
+Automc.usps=Mclust(data= auto4,G=10)
 NMI(Automc.usps$classification,usps$class)
-#0.145
+#0.194
 ARI(Automc.usps$classification,usps$class)
-#0.066
+#0.093
 plot(auto3, col=Automc.usps$classification,, main="Mclust de usps autoencoder")
