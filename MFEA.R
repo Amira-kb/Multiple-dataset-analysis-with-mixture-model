@@ -298,3 +298,15 @@ NMI(Automc.mfeat$classification,mfeat$class)
 ARI(Automc.mfeat$classification,mfeat$class)
 #0.333 avec dim=2 et 0.568 avec dim=10
 plot(auto3, col=Automc.mfeat$classification,, main="Mclust de mfeat autoencoder")
+
+
+
+
+#Testons Mclust en prenant le resultat de la tsne pour entrée
+tsnemc.mfeat=Mclust(data= tsne.mfeat$Y,G=10, modelNames = c("VVV"))
+NMI(tsnemc.mfeat$classification,mfeat$class)
+#0.925
+ARI(tsnemc.mfeat$classification,mfeat$class)
+#0.923
+plot(tsne.mfeat$Y, col=tsnemc.mfeat$classification,, main="Mclust de mfeat a partir de la tsne")
+

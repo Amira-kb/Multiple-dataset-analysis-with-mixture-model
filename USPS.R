@@ -219,7 +219,7 @@ plot(mdr.usps)
 #11
 
 
-tsne.usps=Rtsne(usps[,-257],dim=2,perplexity=50,check_duplicates = FALSE)
+tsne.usps=Rtsne(usps[,-257],dim=2,perplexity=70,check_duplicates = FALSE)
 
 plot(tsne.usps$Y,col=usps$class,xlab="1ere composante", ylab="2eme composante", main="Vraie partition de usps avec t-sne") #true
 
@@ -271,4 +271,16 @@ NMI(Automc.usps$classification,usps$class)
 ARI(Automc.usps$classification,usps$class)
 #0.522
 plot(auto4, col=Automc.usps$classification,, main="Mclust de usps autoencoder")
+
+
+
+
+#Testons Mclust en prenant le resultat de la tsne pour entrée
+tsnemc.usps=Mclust(data= tsne.usps$Y,G=10, modelNames = c("VVV"))
+NMI(tsnemc.usps$classification,usps$class)
+#0.81
+ARI(tsnemc.usps$classification,usps$class)
+#0.721
+plot(tsne.usps$Y, col=tsnemc.usps$classification,, main="Mclust de usps a partir de la tsne")
+
 

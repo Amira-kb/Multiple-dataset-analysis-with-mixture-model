@@ -257,9 +257,20 @@ write.csv(optdigits[,-65],"optdigits.csv",row.names=FALSE)
 
 auto5=read.csv("auto5.csv", header = F, skip=-1)
 plot(auto5, col=optdigits$class,, main="Reduction de optdigits avec un autoencoder")
-Automc.optdigits=Mclust(data= auto5,G=10, modelNames = c("VVV"))
+Automc.optdigits=Mclust(data= tsne.optdigits$Y,G=10, modelNames = c("VVV"))
 NMI(Automc.optdigits$classification,optdigits$class)
 #0.677  et 0.843 avec dim=10
 ARI(Automc.optdigits$classification,optdigits$class)
 #0.566 et 0.787 avec dim=10
 plot(auto5, col=Automc.optdigits$classification,, main="Mclust de optdigits autoencoder")
+
+
+#Testons Mclust en prenant le resultat de la tsne pour entrée
+tsnemc.optdigits=Mclust(data= tsne.optdigits$Y,G=10, modelNames = c("VVV"))
+NMI(tsnemc.optdigits$classification,optdigits$class)
+#0.920
+ARI(tsnemc.optdigits$classification,optdigits$class)
+#0.897
+plot(tsne.optdigits$Y, col=tsnemc.optdigits$classification,, main="Mclust de optdigits a partir de la tsne")
+
+

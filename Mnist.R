@@ -294,3 +294,16 @@ NMI(Automc.mnist$classification,mnist$class)
 ARI(Automc.mnist$classification,mnist$class)
 #0.32
 plot(auto2, col=Automc.mnist$classification,, main="Mclust de mnist autoencoder")
+
+
+
+
+#Testons Mclust en prenant le resultat de la tsne pour entrée
+tsnemc.mnist=Mclust(data= tsne.mnist$Y,G=10, modelNames = c("VVV"))
+NMI(tsnemc.mnist$classification,mnist$class)
+#0.720
+ARI(tsnemc.mnist$classification,mnist$class)
+#0.634
+plot(tsne.mnist$Y, col=tsnemc.mnist$classification,, main="Mclust de mnist a partir de la tsne")
+
+

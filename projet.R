@@ -265,3 +265,14 @@ plot(auto, col=Automc.jaffe$classification,, main="Mclust de jaffe autoencoder")
 #0.807
 ARI(Automc.jaffe$classification,jaffe$class)
 #0.60
+
+
+
+#Testons Mclust en prenant le resultat de la tsne pour entrée
+tsnemc.jaffe=Mclust(data= tsne.jaffe$Y,G=10, modelNames = c("VVV"))
+NMI(tsnemc.jaffe$classification,jaffe$class)
+#0.885
+ARI(tsnemc.jaffe$classification,jaffe$class)
+#0.774
+plot(tsne.jaffe$Y, col=tsnemc.jaffe$classification,, main="Mclust de jaffe a partir de la tsne")
+
