@@ -105,7 +105,7 @@ ARI(complete.usps$Best.partition,usps$class)
 
 ###5
 hcpcward.usps=HCPC(pca.usps,method = "ward")
-#4
+#3
 hcpccomp.usps=HCPC(pca.usps,method = "complete")
 #3
 hcpcsingle.usps=HCPC(pca.usps,method = "single")
@@ -149,14 +149,34 @@ NMI(average.usps$Best.partition,hcpcav.usps2$data.clust$clust)
 ARI(average.usps$Best.partition,hcpcav.usps2$data.clust$clust)
 #0.04
 
+
+NMI(hcpcward.usps2$data.clust$clust,usps$class)
+#0.373
+ARI(hcpcward.usps2$data.clust$clust,usps$class)
+#0.284
+NMI(hcpccomp.usps2$data.clust$clust,usps$class)
+#0.376
+ARI(hcpccomp.usps2$data.clust$clust,usps$class)
+#0.289
+NMI(hcpcsingle.usps2$data.clust$clust,usps$class)
+#0.374
+ARI(hcpcsingle.usps2$data.clust$clust,usps$class)
+#0.286
+NMI(hcpcav.usps2$data.clust$clust,usps$class)
+#0.373
+ARI(hcpcav.usps2$data.clust$clust,usps$class)
+#0.284
+
+
+
 ###7
-pc.MF=prcomp(usps[,-257])
-plot(as.data.frame(pc.MF$x[,1:2]), col=usps$class)
+pc.US=prcomp(usps[,-257])
+plot(as.data.frame(pc.US$x[,1:2]), col=usps$class)
 strategie=mixmodStrategy(algo="EM",initMethod="smallEM",nbTry=10,epsilonInInit=0.00001,seed=42)
 #mix.usps=mixmodCluster(data=as.data.frame(pc.MF$x[,1:2]),nbCluster=10, strategy=strategie,dataType="quantitative",models=mixmodGaussianModel())
 #Gaussian_pk_Lk_Bk
 #VVI avec proportion egales
-mix.usps=mixmodCluster(data=as.data.frame(pc.MF$x[,1:10]),nbCluster=10, strategy=strategie,dataType="quantitative",models=mixmodGaussianModel(listModels=c("Gaussian_pk_Lk_Bk")))
+mix.usps=mixmodCluster(data=as.data.frame(pc.US$x[,1:10]),nbCluster=10, strategy=strategie,dataType="quantitative",models=mixmodGaussianModel(listModels=c("Gaussian_pk_Lk_Bk")))
 
 mix.usps@bestResult@partition
 table(mix.usps@bestResult@partition,usps$class)
@@ -164,9 +184,18 @@ NMI(mix.usps@bestResult@partition,usps$class)
 #0.566
 ARI(mix.usps@bestResult@partition,usps$class)
 #0.320
-plot(as.data.frame(pc.MF$x[,1:2]), col=mix.usps@bestResult@partition)
+plot(as.data.frame(pc.US$x[,1:2]), col=mix.usps@bestResult@partition)
 
-mc.usps=Mclust(data= pc.MF$x[,1:10],G=10, modelNames = c("VEV"))
+
+#2 composantes
+mc.usps=Mclust(data= pc.US$x[,1:2],G=10, modelNames = c("VVV"))
+table( mc.usps$classification,usps$class)
+NMI(mc.usps$classification,usps$class)
+#0.428
+ARI(mc.usps$classification,usps$class)
+#0.317
+#10 composantes
+mc.usps=Mclust(data= pc.US$x[,1:10],G=10, modelNames = c("VEV"))
 table( mc.usps$classification,usps$class)
 NMI(mc.usps$classification,usps$class)
 #0.655
@@ -227,8 +256,8 @@ ux_train=usps[usps_indice,-257]
 uy_train=usps[usps_indice,257]
 ux_test=usps[-usps_indice,-257]
 uy_test=usps[-usps_indice,257]
-ux_train=ux_train/255
-ux_test=ux_test/255
+ux_train=((ux_train- min(ux_train)) /(max(ux_train)-min(ux_train)))
+ux_test=((ux_train- min(ux_train)) /(max(ux_train)-min(ux_train)))
 
 write.csv(ux_train,"ux_train.csv",row.names=FALSE)
 write.csv(ux_test,"ux_test.csv",row.names=FALSE)
@@ -236,9 +265,10 @@ write.csv(usps[,-257],"usps.csv",row.names=FALSE)
 
 auto4=read.csv("auto4.csv", header = F, skip=-1)
 plot(auto4, col=usps$class,, main="Reduction de usps avec un autoencoder")
-Automc.usps=Mclust(data= auto4,G=10)
+Automc.usps=Mclust(data=auto4,G=10,c("VVV"))
 NMI(Automc.usps$classification,usps$class)
-#0.194
+#0.695
 ARI(Automc.usps$classification,usps$class)
-#0.093
-plot(auto3, col=Automc.usps$classification,, main="Mclust de usps autoencoder")
+#0.522
+plot(auto4, col=Automc.usps$classification,, main="Mclust de usps autoencoder")
+

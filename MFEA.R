@@ -180,6 +180,31 @@ NMI(average.mfeat$Best.partition,hcpcav.mfeat2$data.clust$clust)
 ARI(average.mfeat$Best.partition,hcpcav.mfeat2$data.clust$clust)
 #0.301
 
+
+
+
+
+NMI(hcpcward.mfeat2$data.clust$clust,mfeat$class)
+#0.480
+ARI(hcpcward.mfeat2$data.clust$clust,mfeat$class)
+#0.324
+
+NMI(hcpccomp.mfeat2$data.clust$clust,mfeat$class)
+#0.487
+ARI(hcpccomp.mfeat2$data.clust$clust,mfeat$class)
+#0.327
+
+NMI(hcpcsingle.mfeat2$data.clust$clust,mfeat$class)
+#0.48
+ARI(hcpcsingle.mfeat2$data.clust$clust,mfeat$class)
+#0.324
+
+NMI(hcpcav.mfeat2$data.clust$clust,mfeat$class)
+#0.49
+ARI(hcpcav.mfeat2$data.clust$clust,mfeat$class)
+#0.33
+
+
 ###7
 pc.MF=prcomp(mfeat[,-241])
 plot(as.data.frame(pc.MF$x[,1:2]), col=mfeat$class)
@@ -197,7 +222,7 @@ ARI(mix.mfeat@bestResult@partition,mfeat$class)
 #0.633
 plot(as.data.frame(pc.MF$x[,1:2]), col=mix.mfeat@bestResult@partition)
 
-mc.mfeat=Mclust(data= pc.MF$x[,1:10],G=10, modelNames = c("VEV"))
+mc.mfeat=Mclust(data= pc.MF$x[,1:10],G=10, modelNames = c("VVV"))
 table( mc.mfeat$classification,mfeat$class)
 NMI(mc.mfeat$classification,mfeat$class)
 #0.760
@@ -258,8 +283,8 @@ mfx_train=mfeat[mfeat_indice,-241]
 mfy_train=mfeat[mfeat_indice,241]
 mfx_test=mfeat[-mfeat_indice,-241]
 mfy_test=mfeat[-mfeat_indice,241]
-mfx_train=mfx_train/255
-mfx_test=mfx_test/255
+mfx_train=scale(mfx_train)
+mfx_test=scale(mfx_test)
 
 write.csv(mfx_train,"mfx_train.csv",row.names=FALSE)
 write.csv(mfx_test,"mfx_test.csv",row.names=FALSE)
@@ -267,9 +292,9 @@ write.csv(mfeat[,-241],"mfeat.csv",row.names=FALSE)
 
 auto3=read.csv("auto3.csv", header = F, skip=-1)
 plot(auto3, col=mfeat$class,, main="Reduction de mfeat avec un autoencoder")
-Automc.mfeat=Mclust(data= auto3,G=10)
+Automc.mfeat=Mclust(data= auto3,G=10,modelNames = c("VEV"))
 NMI(Automc.mfeat$classification,mfeat$class)
-#0.145
+#0.48 avec dim=2 et 0.658 avec dim=10
 ARI(Automc.mfeat$classification,mfeat$class)
-#0.066
+#0.333 avec dim=2 et 0.568 avec dim=10
 plot(auto3, col=Automc.mfeat$classification,, main="Mclust de mfeat autoencoder")

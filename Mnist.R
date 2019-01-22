@@ -171,6 +171,34 @@ NMI(average.mnist$Best.partition,hcpcav.mnist2$data.clust$clust)
 ARI(average.mnist$Best.partition,hcpcav.mnist2$data.clust$clust)
 #0.070
 
+
+NMI(hcpcward.mnist2$data.clust$clust,mnist$class)
+#0.2
+ARI(hcpcward.mnist2$data.clust$clust,mnist$class)
+#0.132
+
+NMI(hcpccomp.mnist2$data.clust$clust,mnist$class)
+#0.194
+ARI(hcpccomp.mnist2$data.clust$clust,mnist$class)
+#0.128
+
+NMI(hcpcsingle.mnist2$data.clust$clust,mnist$class)
+#0.196
+ARI(hcpcsingle.mnist2$data.clust$clust,mnist$class)
+#0.129
+
+NMI(hcpcav.mnist2$data.clust$clust,mnist$class)
+#0.203
+ARI(hcpcav.mnist2$data.clust$clust,mnist$class)
+#0.134
+
+
+
+
+
+
+
+
 ###7
 pc.M=prcomp(mnist[,-785])
 plot(as.data.frame(pc.M$x[,1:2]), col=mnist$class)
@@ -251,8 +279,8 @@ mx_train=mnist[mnist_indice,-785]
 my_train=mnist[mnist_indice,785]
 mx_test=mnist[-mnist_indice,-785]
 my_test=mnist[-mnist_indice,785]
-mx_train=mx_train/255
-mx_test=mx_test/255
+mx_train= mx_train/255
+mx_test= mx_test/255
 
 write.csv(mx_train,"mx_train.csv",row.names=FALSE)
 write.csv(mx_test,"mx_test.csv",row.names=FALSE)

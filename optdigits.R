@@ -191,9 +191,9 @@ plot(as.data.frame(pc.op$x[,1:2]), col=mix.optdigits@bestResult@partition)
 mc.optdigits=Mclust(data= pc.op$x[,1:10],G=10, modelNames = c("EEV"))
 table( mc.optdigits$classification,optdigits$class)
 NMI(mc.optdigits$classification,optdigits$class)
-#0.811
+#0.88
 ARI(mc.optdigits$classification,optdigits$class)
-#0.765
+#0.881
 
 #8
 NMI(mix.optdigits@bestResult@partition,mc.optdigits$classification)
@@ -248,8 +248,8 @@ ox_train=optdigits[optdigits_indice,-65]
 oy_train=optdigits[optdigits_indice,65]
 ox_test=optdigits[-optdigits_indice,-65]
 oy_test=optdigits[-optdigits_indice,65]
-ox_train=ox_train/255
-ox_test=ox_test/255
+ox_train=((ox_train- min(ox_train)) /(max(ox_train)-min(ox_train)))
+ox_test=((ox_test- min(ox_test)) /(max(ox_test)-min(ox_test)))
 
 write.csv(ox_train,"ox_train.csv",row.names=FALSE)
 write.csv(ox_test,"ox_test.csv",row.names=FALSE)
@@ -257,9 +257,9 @@ write.csv(optdigits[,-65],"optdigits.csv",row.names=FALSE)
 
 auto5=read.csv("auto5.csv", header = F, skip=-1)
 plot(auto5, col=optdigits$class,, main="Reduction de optdigits avec un autoencoder")
-Automc.optdigits=Mclust(data= auto5,G=10)
+Automc.optdigits=Mclust(data= auto5,G=10, modelNames = c("VVV"))
 NMI(Automc.optdigits$classification,optdigits$class)
-#0.09
+#0.677  et 0.843 avec dim=10
 ARI(Automc.optdigits$classification,optdigits$class)
-#0.040
+#0.566 et 0.787 avec dim=10
 plot(auto5, col=Automc.optdigits$classification,, main="Mclust de optdigits autoencoder")

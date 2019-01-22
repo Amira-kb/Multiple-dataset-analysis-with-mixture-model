@@ -154,6 +154,28 @@ NMI(average.jaffe$Best.partition,hcpcav.jeffe2$data.clust$clust)
 #0.624
 
 
+NMI(hcpcward.jeffe2$data.clust$clust,jaffe$class)
+#0.744
+ARI(hcpcward.jeffe2$data.clust$clust,jaffe$class)
+#0.574
+
+NMI(hcpccomp.jeffe2$data.clust$clust,jaffe$class)
+#0.734
+ARI(hcpccomp.jeffe2$data.clust$clust,jaffe$class)
+#0.5715
+
+NMI(hcpcsingle.jeffe2$data.clust$clust,jaffe$class)
+#0.663
+ARI(hcpcsingle.jeffe2$data.clust$clust,jaffe$class)
+#0.453
+
+NMI(hcpcav.jeffe2$data.clust$clust,jaffe$class)
+#0.669
+ARI(hcpcav.jeffe2$data.clust$clust,jaffe$class)
+#0.434
+
+
+
 ###7
 pc=prcomp(jaffe[,-677])
 plot(as.data.frame(pc$x[,1:2]), col=jaffe$class)
@@ -228,16 +250,18 @@ jx_train=jaffe[jaffe_indice,-677]
 jy_train=jaffe[jaffe_indice,677]
 jx_test=jaffe[-jaffe_indice,-677]
 jy_test=jaffe[-jaffe_indice,677]
-jx_train=jx_train/255
-jx_test=jx_test/255
+jx_train=scale(jx_train)
+jx_test=scale(jx_test)
 
 write.csv(jx_train,"jx_train.csv",row.names=FALSE)
 write.csv(jx_test,"jx_test.csv",row.names=FALSE)
 write.csv(jaffe[,-677],"jaffe.csv",row.names=FALSE)
 
 auto=read.csv("auto.csv", header = F, skip=-1)
-plot(auto, col=jaffe$class,, main="Reduction de jaffe avec un autoencoder")
+plot(auto, col=jaffe$class, main="Reduction de jaffe avec un autoencoder")
 Automc.jaffe=Mclust(data= auto,G=10)
 NMI(Automc.jaffe$classification,jaffe$class)
 plot(auto, col=Automc.jaffe$classification,, main="Mclust de jaffe autoencoder")
 #0.807
+ARI(Automc.jaffe$classification,jaffe$class)
+#0.60
