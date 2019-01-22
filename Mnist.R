@@ -246,6 +246,7 @@ tsne.mnist=Rtsne(mnist[,-785],dim=2,perplexity=50)
 
 plot(tsne.mnist$Y,col=mnist$class,xlab="1ere composante", ylab="2eme composante", main="Vraie partition de Mnist avec t-sne") #true
 
+t=Rtsne(auto2,dim=2,perplexity=50)
 plot(tsne.mnist$Y,col=km.mnist$Best.partition, xlab="1ere composante", ylab="2eme composante", main="Kmean NbClust avec t-sne") #kmean NbClust
 
 plot(tsne.mnist$Y,col=ward.mnist$Best.partition, xlab="1ere composante", ylab="2eme composante", main="Ward NbClust avec t-sne") #ward NbClust
