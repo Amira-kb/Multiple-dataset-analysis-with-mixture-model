@@ -77,7 +77,7 @@ ARI(average.usps$Best.partition,usps$class)
 
 
 single.usps=NbClust(usps[,-257],method = "single",index = "silhouette", max.nc = 10)
-#2
+#2 cluster
 single.usps=NbClust(usps[,-257],method = "single",index = "silhouette", max.nc = 10,min.nc = 10)
 
 plot(pca.usps$ind$coord,col=single.usps$Best.partition,main = "CAH single sur usps")
@@ -88,7 +88,7 @@ ARI(single.usps$Best.partition,usps$class)
 #4.098145e-06
 
 complete.usps=NbClust(usps[,-257],method = "complete",index = "silhouette", max.nc = 10)
-#2
+#2 cluster
 complete.usps=NbClust(usps[,-257],method = "complete",index = "silhouette", max.nc = 10, min.nc = 10)
 plot(pca.usps$ind$coord,col=complete.usps$Best.partition,main = "CAH complete sur usps")
 #NbClust(usps, method = "kmeans", distance = "euclidean")
@@ -249,8 +249,7 @@ plot(tsne.usps$Y,col=mc.usps$classification, xlab="1ere composante", ylab="2eme 
 
 
 ##12
-library(keras)
-install_keras()
+
 usps_indice=createDataPartition(usps$class,p=0.9, list=F)
 ux_train=usps[usps_indice,-257]
 uy_train=usps[usps_indice,257]
@@ -265,11 +264,11 @@ write.csv(usps[,-257],"usps.csv",row.names=FALSE)
 
 auto4=read.csv("auto4.csv", header = F, skip=-1)
 plot(auto4, col=usps$class,, main="Reduction de usps avec un autoencoder")
-Automc.usps=Mclust(data=auto4,G=10,c("VVV"))
+Automc.usps=Mclust(data=auto4,G=10,c("VEV"))
 NMI(Automc.usps$classification,usps$class)
-#0.695
+#0.44
 ARI(Automc.usps$classification,usps$class)
-#0.522
+#0.301
 plot(auto4, col=Automc.usps$classification,, main="Mclust de usps autoencoder")
 
 

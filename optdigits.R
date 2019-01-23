@@ -78,7 +78,7 @@ ARI(average.optdigits$Best.partition,optdigits$class)
 
 
 single.optdigits=NbClust(optdigits[,-65],method = "single",index = "silhouette", max.nc = 10)
-#2
+#2 cluster
 single.optdigits=NbClust(optdigits[,-65],method = "single",index = "silhouette", max.nc = 10,min.nc = 10)
 
 plot(pca.optdigits$ind$coord,col=single.optdigits$Best.partition,main = "CAH single sur optdigits")
@@ -89,7 +89,7 @@ ARI(single.optdigits$Best.partition,optdigits$class)
 #1.856392e-06
 
 complete.optdigits=NbClust(optdigits[,-65],method = "complete",index = "silhouette",max.nc = 10)
-#13
+#13 cluster
 complete.optdigits=NbClust(optdigits[,-65],method = "complete",index = "silhouette", max.nc = 10, min.nc = 10)
 plot(pca.optdigits$ind$coord,col=complete.optdigits$Best.partition,main = "CAH complete sur optdigits")
 #NbClust(optdigits, method = "kmeans", distance = "euclidean")
@@ -241,8 +241,7 @@ plot(tsne.optdigits$Y,col=mc.optdigits$classification, xlab="1ere composante", y
 
 
 ##12
-library(keras)
-install_keras()
+
 optdigits_indice=createDataPartition(optdigits$class,p=0.9, list=F)
 ox_train=optdigits[optdigits_indice,-65]
 oy_train=optdigits[optdigits_indice,65]

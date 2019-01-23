@@ -77,7 +77,7 @@ ARI(average.mfeat$Best.partition,mfeat$class)
 
 
 single.mfeat=NbClust(mfeat[,-241],method = "single",index = "silhouette", max.nc = 10)
-#2
+#2 cluster
 single.mfeat=NbClust(mfeat[,-241],method = "single",index = "silhouette", max.nc = 10,min.nc = 10)
 
 plot(pca.mfeat$ind$coord,col=single.mfeat$Best.partition,main = "CAH single sur mfeat")
@@ -88,7 +88,7 @@ ARI(single.mfeat$Best.partition,mfeat$class)
 #7.197997e-06
 
 complete.mfeat=NbClust(mfeat[,-241],method = "complete",index = "silhouette", max.nc = 10)
-#3
+#3 cluster
 complete.mfeat=NbClust(mfeat[,-241],method = "complete",index = "silhouette", max.nc = 10, min.nc = 10)
 plot(pca.mfeat$ind$coord,col=complete.mfeat$Best.partition,main = "CAH complete sur mfeat")
 #NbClust(mfeat, method = "kmeans", distance = "euclidean")
@@ -276,8 +276,7 @@ plot(tsne.mfeat$Y,col=mc.mfeat$classification, xlab="1ere composante", ylab="2em
 
 
 ##12
-library(keras)
-install_keras()
+
 mfeat_indice=createDataPartition(mfeat$class,p=0.9, list=F)
 mfx_train=mfeat[mfeat_indice,-241]
 mfy_train=mfeat[mfeat_indice,241]

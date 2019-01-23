@@ -71,9 +71,8 @@ NMI(average.mnist$Best.partition,mnist$class)
 
 
 
-
 single.mnist=NbClust(mnist[,-785],method = "single",index = "silhouette", max.nc = 10)
-#2
+#2 cluster
 single.mnist=NbClust(mnist[,-785],method = "single",index = "silhouette", max.nc = 10,min.nc = 10)
 
 plot(pca.mnist$ind$coord,col=single.mnist$Best.partition,main = "CAH single sur mnist")
@@ -83,7 +82,7 @@ NMI(single.mnist$Best.partition,mnist$class)
 
 
 complete.mnist=NbClust(mnist[,-785],method = "complete",index = "silhouette", max.nc = 10)
-#2
+#2 cluster
 complete.mnist=NbClust(mnist[,-785],method = "complete",index = "silhouette", max.nc = 10, min.nc = 10)
 plot(pca.mnist$ind$coord,col=complete.mnist$Best.partition,main = "CAH complete sur mnist")
 #NbClust(mnist, method = "kmeans", distance = "euclidean")
@@ -273,8 +272,6 @@ plot(tsne.mnist$Y,col=mc.mnist$classification, xlab="1ere composante", ylab="2em
 
 
 ##12
-library(keras)
-install_keras()
 mnist_indice=createDataPartition(mnist$class,p=0.8, list=F)
 mx_train=mnist[mnist_indice,-785]
 my_train=mnist[mnist_indice,785]
